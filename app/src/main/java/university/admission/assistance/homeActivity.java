@@ -10,7 +10,7 @@ import android.widget.Toast;
 
 public class homeActivity extends AppCompatActivity implements View.OnClickListener {
     private Button scienceButton,commerceButton,artsButton,loginButton,signUpButton,universityProfileButton;
-    private String SCIENCE="science",COMMERCE="commerce",ARTS="arts";
+    private String SCIENCE="science",COMMERCE="commerce",ARTS="humanStudies";
     private String BACKGROUND_KEY="background";
     private double n;
 

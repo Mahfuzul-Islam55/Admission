@@ -1,6 +1,39 @@
 package university.admission.assistance;
 
+import java.util.ArrayList;
+
 public class Dbcontract {
+
+    public static String BACKGROUND="background";
+    public static String
+            SCIENCE="science",
+            COMMERCE="commerce",
+            ARTS="humanStudies";
+
+    public static String SSC_YEAR="sscYear";
+    public static String SSC_GPA="sscGpa";
+    public static String HSC_YEAR="hscYear";
+    public static String HSC_GPA="hscGpa";
+
+
+    //STUDENT information for "SCIENCE" ONLY
+
+    public static String PHYSICSGPA="physicsGpa";
+    public static String CHEMISTRYGPA="chemistryGpa";
+    public static String HIGHER_MATHGPA="higherMathGpa";
+    public static String BIOLOGYGPA="biologyGpa";
+    public static String BANGLAGPA="banglaGpa";
+    public static String ENGLISHGPA="englishGpa";
+    public static String ICTGPA="ictGpa";
+
+    //STUDENT information for "COMMERCE" only
+
+
+    //STUDENT information for "ARTS" only
+
+
+
+
 
     private static double SSC_PASS_YEAR;
     private static double SSC_MIN_GPA;
@@ -24,7 +57,17 @@ public class Dbcontract {
     //STUDENT information for "ARTS" only
 
 
+    public static String CHECK_UNIVERSITIES="checkAvailableUniversities";
+    public static String UNIVERSITY_INFORMATION="universityAllInformation";
+    public static String CHECK_UNIVERSITIES_URL="http://192.168.0.104/www/admissionAssistance/CheckAvailableUniversity.php";
+    public static String UNIVERSITY_INFORMATION_URL="";
 
+    private static ArrayList<availableUniversityInformation>availableUniversityInformationArrayList;
+
+    public static void setAvailableUniversityInformationArrayList(ArrayList<availableUniversityInformation> availableUniversityInformationArrayList) {
+        Dbcontract.availableUniversityInformationArrayList = availableUniversityInformationArrayList;
+    }
+    //getter and setter of above
 
     public static double getSscPassYear() {
         return SSC_PASS_YEAR;

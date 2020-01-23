@@ -72,7 +72,7 @@ public class student extends AppCompatActivity implements View.OnClickListener {
 
 
     }
-    private boolean studentAllInformation(){
+    private boolean getStudentAllInformation(){
 
         try {
             Dbcontract.setSscPassYear(Double.parseDouble(SSC_PASS_YEAR.getText().toString()));
@@ -140,8 +140,13 @@ public class student extends AppCompatActivity implements View.OnClickListener {
     public void onClick(View view) {
         long id=view.getId();
         if(id==R.id.checkUniversitiesButtonId){
-            if(studentAllInformation()){
-                Toast.makeText(this,"All Field get information",Toast.LENGTH_SHORT).show();
+            if(getStudentAllInformation()){
+                Toast.makeText(this,"All Fielded up",Toast.LENGTH_SHORT).show();
+
+                String method=Dbcontract.CHECK_UNIVERSITIES;
+                BackgroundTask backgroundTask=new BackgroundTask(this,Dbcontract.SCIENCE);
+                backgroundTask.execute(method);
+
             }
             else  Toast.makeText(this,"All Field Not get information",Toast.LENGTH_SHORT).show();
 
