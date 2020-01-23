@@ -6,12 +6,13 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import java.util.StringTokenizer;
 
 public class homeActivity extends AppCompatActivity implements View.OnClickListener {
-    private Button scienceButton,commerceButton,artsButton,loginButton,signUpButton,universityProfileButton;
+    private ImageView scienceButton,commerceButton,artsButton,notificationImageButton;
     private String SCIENCE="science",COMMERCE="commerce",ARTS="humanStudies";
     private String BACKGROUND_KEY="background";
     private double n;
@@ -31,12 +32,12 @@ public class homeActivity extends AppCompatActivity implements View.OnClickListe
         scienceButton=findViewById(R.id.scienceButtonId);
         commerceButton=findViewById(R.id.commerceButtonId);
         artsButton=findViewById(R.id.artsButtonId);
-        universityProfileButton=findViewById(R.id.universityProfileId);
+        notificationImageButton=findViewById(R.id.notificationId);
 
         scienceButton.setOnClickListener(this);
         commerceButton.setOnClickListener(this);
         artsButton.setOnClickListener(this);
-        universityProfileButton.setOnClickListener(this);
+        notificationImageButton.setOnClickListener(this);
     }
 
     @Override
@@ -52,24 +53,22 @@ public class homeActivity extends AppCompatActivity implements View.OnClickListe
             Toast.makeText(this,"Science Background",Toast.LENGTH_SHORT).show();
         }
         else if(id==R.id.commerceButtonId){
-            Dbcontract.CURRENT_BACKGROUND=COMMERCE;
+            /*Dbcontract.CURRENT_BACKGROUND=COMMERCE;
             Intent intent= new Intent(homeActivity.this,student.class);
             intent.putExtra(BACKGROUND_KEY,COMMERCE);
-            startActivity(intent);
+            startActivity(intent);*/
             Toast.makeText(this,"Commerce Background",Toast.LENGTH_SHORT).show();
         }
         else if(id==R.id.artsButtonId){
-            Dbcontract.CURRENT_BACKGROUND=ARTS;
+           /* Dbcontract.CURRENT_BACKGROUND=ARTS;
             Intent intent= new Intent(homeActivity.this,student.class);
             intent.putExtra(BACKGROUND_KEY,ARTS);
-            startActivity(intent);
+            startActivity(intent);*/
             Toast.makeText(this,"Arts Background",Toast.LENGTH_SHORT).show();
         }
-        else if(id==R.id.universityProfileId){
-            Intent intent= new Intent(homeActivity.this,universityAdmissionInfoActivity.class);
-            intent.putExtra(BACKGROUND_KEY,ARTS);
-            startActivity(intent);
-            Toast.makeText(this,"University profile",Toast.LENGTH_SHORT).show();
+        else if(id==R.id.notificationId){
+
+            Toast.makeText(this,"Notifications",Toast.LENGTH_SHORT).show();
         }
 
 
