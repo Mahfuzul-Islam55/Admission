@@ -8,13 +8,7 @@
     android:orientation="vertical"
     tools:context=".universityAdmissionInfoActivity">
 
-    <ScrollView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
 
-<LinearLayout
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content">
 
 
 <!--profile-->
@@ -64,14 +58,30 @@
 
 <!--main information-->
 
+
+<!--            Eligible units Listview-->
     <LinearLayout
+        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="80dp">
         <TextView
             android:id="@+id/universityProfileEligileUnitTextviewId"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Eligible units:"/>
+
+        <ListView
+            android:background="#ACA9A9"
+            android:id="@+id/universityProfileUnitListViewId"
+            android:layout_gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:divider="#969CF0"
+            android:dividerHeight="2dp"
+            android:listSelector="#04DBDB">
+
+        </ListView>
+
     </LinearLayout>
 
 
@@ -275,8 +285,6 @@
        android:text="Apply now"/>
 
 
-</LinearLayout>
-    </ScrollView>
 
 
 </LinearLayout>

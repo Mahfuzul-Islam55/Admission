@@ -4,7 +4,10 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -14,6 +17,8 @@ import java.util.StringTokenizer;
 
 public class universityAdmissionInfoActivity extends AppCompatActivity  implements View.OnClickListener {
 
+
+    private ListView unitListview;
     private TextView
             ELIGIBLE_UNIVERSITY,
             ELIGIBLE_UNIT,
@@ -32,6 +37,7 @@ public class universityAdmissionInfoActivity extends AppCompatActivity  implemen
     private ArrayList<universityUnitInformation>universityUnitInformations;
     private ArrayList<availableUniversityInformation>availableUniversityInformations;
 
+    private ArrayList<String>ELIGIBLE_UNIT_ARRAY_LIST=null;
     private int UNIVERSITY_LIST_INDEX_POSITION=0;
     private String ELIGBLE_UNIVERSITY_NAME;
     private String ELIGIBLE_ALL_UNIT="";
@@ -56,12 +62,30 @@ public class universityAdmissionInfoActivity extends AppCompatActivity  implemen
         university_ClickIndex();
        updateCurrentTimeAndDate();
        findAll();
-       loadUnitInformation();
+       loadUnitInformation();//for 1 unit
+
+    }
+    private void loadUnitListview(){
+        if(ELIGIBLE_UNIT_ARRAY_LIST==null)return;
+        ArrayList<String>listData=ELIGIBLE_UNIT_ARRAY_LIST;
+        ArrayAdapter<String>adapter=new ArrayAdapter<>(this,R.layout.eligible_unit_list_view,R.id.eligibleUnitListTextviewId,listData);
+        unitListview.setAdapter(adapter);
+
+        unitListview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
+                Toast.makeText(universityAdmissionInfoActivity.this,"clicked",Toast.LENGTH_SHORT).show();
+            }
+        });
+
+
     }
     private void university_ClickIndex(){
         UNIVERSITY_LIST_INDEX_POSITION=Integer.parseInt(getIntent().getExtras().getString(Dbcontract.UNIVERSITY_LIST_INDEX_POSITION_KEY));
     }
     private void findAll(){
+
+        unitListview= this.<ListView>findViewById(R.id.universityProfileUnitListViewId);
 
         ELIGIBLE_UNIVERSITY= this.<TextView>findViewById(R.id.universityProfileFullNameTextviewId);
         ELIGIBLE_UNIT= this.<TextView>findViewById(R.id.universityProfileEligileUnitTextviewId);
@@ -89,9 +113,12 @@ public class universityAdmissionInfoActivity extends AppCompatActivity  implemen
         ELIGBLE_UNIVERSITY_NAME=universityInformation.getUNIVERSITY_NAME();
 
         ArrayList<String>units=universityInformation.getUnitList();
+        ELIGIBLE_UNIT_ARRAY_LIST=new ArrayList<>();
+
         ELIGIBLE_ALL_UNIT="";
         for (int i=0;i<units.size();i++){
             ELIGIBLE_ALL_UNIT+=units.get(i)+" ";
+            ELIGIBLE_UNIT_ARRAY_LIST.add(units.get(i));
         }
 
 
@@ -189,6 +216,7 @@ public class universityAdmissionInfoActivity extends AppCompatActivity  implemen
         long id=view.getId();
         if(id==R.id.universityProfileApplyButtonTextviewId){
             loadUnitInformation();
+            loadUnitListview();
         }
     }
 }

@@ -13,9 +13,9 @@ public class Dbcontract {
 
 
     public static String CHECK_UNIVERSITIES="checkAvailableUniversities";
-    public static String CHECK_UNIVERSITIES_URL="http://10.100.161.240/www/admissionAssistance/CheckAvailableUniversity.php";
+    public static String CHECK_UNIVERSITIES_URL="http://10.100.37.32/www/admissionAssistance/CheckAvailableUniversity.php";
     public static String UNIVERSITY_INFORMATION="universityAllInformation";
-    public static String UNIVERSITY_INFORMATION_URL="http://10.100.161.240/www/admissionAssistance/getUniversityUnitInformation.php";
+    public static String UNIVERSITY_INFORMATION_URL="http://10.100.37.32/www/admissionAssistance/getUniversityUnitInformation.php";
 
     public static String UNIVERSITY_ID="university_id";
     public static String UNIT="unit";
