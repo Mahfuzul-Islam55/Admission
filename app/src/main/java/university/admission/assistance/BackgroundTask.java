@@ -106,7 +106,7 @@ public class BackgroundTask extends AsyncTask<String,Void,String> {
                         final String UNIVERSITY_ID=jo.getString("university_id");
                         final String UNIVERSITY_NAME=jo.getString("fullName");
                         final String UNIT=jo.getString("unit");
-                       // System.out.println(UNIT+"\n");
+                        // System.out.println(UNIT+"\n");
 
                         boolean university_exist=false;
                         for (int j=0;j<universityList.size();j++){
@@ -134,7 +134,7 @@ public class BackgroundTask extends AsyncTask<String,Void,String> {
 
                     }
 
-               Dbcontract.setAvailableUniversityInformationArrayList(universityList);
+                    Dbcontract.setAvailableUniversityInformationArrayList(universityList);
 
                    /* for (int j=0;j<universityList.size();j++){
                         availableUniversityInformation temp_university=universityList.get(j);
@@ -224,42 +224,44 @@ public class BackgroundTask extends AsyncTask<String,Void,String> {
 
                     JSONObject jo=null;
 
-                         jo = new JSONObject(result);
+                    jo = new JSONObject(result);
 
-                  //  JSONArray ja=new JSONArray(result);
-
-
-                   // for(int i=0;i<ja.length();i++){
-
-                       // jo=ja.getJSONObject(i);
-
-                        final String UNIT=jo.getString("unit");
-                        final String APPLICATION_BEGIN=jo.getString("applicationBegin");
-                        final String APPLICATION_END=jo.getString("applicationEnd");
-                        final String ADMIT_CARD_BEGIN=jo.getString("admitCardBegin");
-                        final String ADMIT_CARD_END=jo.getString("admitCardEnd");
-                        final String EXAM_DEADLINE=jo.getString("examDeadline");
-                        final String FEES=jo.getString("fees");
-
-                        universityUnitInformation unitInformations=new universityUnitInformation();
-
-                        unitInformations.setUNIT_NAME(UNIT);
-                        unitInformations.setAPPLICATION_BEGIN(APPLICATION_BEGIN);
-                        unitInformations.setAPPLICATION_END(APPLICATION_END);
-                        unitInformations.setADMIT_CARD_BEGIN(ADMIT_CARD_BEGIN);
-                        unitInformations.setADMIT_CARD_END(ADMIT_CARD_END);
-                        unitInformations.setEXAM_DEADLINE(EXAM_DEADLINE);
-                        unitInformations.setFEES(FEES);
+                    //  JSONArray ja=new JSONArray(result);
 
 
-                        universityUnitInformations.add(unitInformations);
-                   // }
+                    // for(int i=0;i<ja.length();i++){
+
+                    // jo=ja.getJSONObject(i);
+
+                    final String UNIT=jo.getString("unit");
+                    final String APPLICATION_BEGIN=jo.getString("applicationBegin");
+                    final String APPLICATION_END=jo.getString("applicationEnd");
+                    final String ADMIT_CARD_BEGIN=jo.getString("admitCardBegin");
+                    final String ADMIT_CARD_END=jo.getString("admitCardEnd");
+                    final String EXAM_DEADLINE=jo.getString("examDeadline");
+                    final String FEES=jo.getString("fees");
+                    final String ADMISSION_LINK=jo.getString("admissionLink");
+
+                    universityUnitInformation unitInformations=new universityUnitInformation();
+
+                    unitInformations.setUNIT_NAME(UNIT);
+                    unitInformations.setAPPLICATION_BEGIN(APPLICATION_BEGIN);
+                    unitInformations.setAPPLICATION_END(APPLICATION_END);
+                    unitInformations.setADMIT_CARD_BEGIN(ADMIT_CARD_BEGIN);
+                    unitInformations.setADMIT_CARD_END(ADMIT_CARD_END);
+                    unitInformations.setEXAM_DEADLINE(EXAM_DEADLINE);
+                    unitInformations.setFEES(FEES);
+                    unitInformations.setAPPLY_LINK(ADMISSION_LINK);
+
+
+                    universityUnitInformations.add(unitInformations);
+                    // }
                     //successfully receive unit all information
                     Dbcontract.setUniversityUnitInformations(universityUnitInformations);
 
-                        System.out.println("Successful unit information");
+                    System.out.println("Successful unit information");
 
-                    System.out.println("Application Begin "+APPLICATION_BEGIN);
+                    // System.out.println("Application Begin "+APPLICATION_BEGIN);
 
 
                 } catch (MalformedURLException e) {
@@ -292,7 +294,11 @@ public class BackgroundTask extends AsyncTask<String,Void,String> {
         if(dialog.isShowing())dialog.dismiss();
         Toast.makeText(ctx,message,Toast.LENGTH_SHORT).show();
 
+        if(message.equals(Dbcontract.Query_ERROR))
+        {
+            Dbcontract.Alert(ctx,"Admission info","No university is applicable");
+        }
+
     }
 }
-
 

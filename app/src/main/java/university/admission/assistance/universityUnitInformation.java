@@ -8,6 +8,15 @@ public class universityUnitInformation {
     private String ADMIT_CARD_BEGIN;
     private String ADMIT_CARD_END;
     private String EXAM_DEADLINE;
+    private String APPLY_LINK;
+
+    public String getAPPLY_LINK() {
+        return APPLY_LINK;
+    }
+
+    public void setAPPLY_LINK(String APPLY_LINK) {
+        this.APPLY_LINK = APPLY_LINK;
+    }
 
     public String getEXAM_DEADLINE() {
         return EXAM_DEADLINE;

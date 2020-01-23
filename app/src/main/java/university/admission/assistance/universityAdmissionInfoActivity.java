@@ -2,11 +2,13 @@ package university.admission.assistance;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -17,6 +19,7 @@ import java.util.StringTokenizer;
 
 public class universityAdmissionInfoActivity extends AppCompatActivity  implements View.OnClickListener {
 
+    private ImageView universityImage;
 
     private ListView unitListview;
     private TextView
@@ -37,6 +40,7 @@ public class universityAdmissionInfoActivity extends AppCompatActivity  implemen
     private ArrayList<universityUnitInformation>universityUnitInformations;
     private ArrayList<availableUniversityInformation>availableUniversityInformations;
 
+
     private String UNIVERSITY_ID=null;
     private ArrayList<String>ELIGIBLE_UNIT_ARRAY_LIST=null;
     private int UNIVERSITY_LIST_INDEX_POSITION=0;
@@ -50,7 +54,7 @@ public class universityAdmissionInfoActivity extends AppCompatActivity  implemen
     private String ADMITCARDEND;
     private String EXAMDEADLINE;
     private String FEES;
-
+    private String ADMISSION_LINK;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,9 +65,9 @@ public class universityAdmissionInfoActivity extends AppCompatActivity  implemen
     }
     private void allFunction(){
         university_ClickIndex();
-       updateCurrentTimeAndDate();
-       findAll();
-       loadUnitInformation();//for 1 unit
+        updateCurrentTimeAndDate();
+        findAll();
+        loadUnitInformation();//for 1 unit
         loadUnitListview();
 
     }
@@ -87,6 +91,9 @@ public class universityAdmissionInfoActivity extends AppCompatActivity  implemen
             }
         });
 
+        if(UNIVERSITY_LIST_INDEX_POSITION+1<Dbcontract.UNIVERSITY_IMAGE.length)
+            universityImage.setImageResource(Dbcontract.UNIVERSITY_IMAGE[UNIVERSITY_LIST_INDEX_POSITION+1]);
+
 
     }
     private ListView getListView(){
@@ -94,6 +101,7 @@ public class universityAdmissionInfoActivity extends AppCompatActivity  implemen
     }
     private void university_ClickIndex(){
         UNIVERSITY_LIST_INDEX_POSITION=Integer.parseInt(getIntent().getExtras().getString(Dbcontract.UNIVERSITY_LIST_INDEX_POSITION_KEY));
+
     }
     private void findAll(){
 
@@ -101,20 +109,21 @@ public class universityAdmissionInfoActivity extends AppCompatActivity  implemen
 
         ELIGIBLE_UNIVERSITY= this.<TextView>findViewById(R.id.universityProfileFullNameTextviewId);
         ELIGIBLE_UNIT= this.<TextView>findViewById(R.id.universityProfileEligileUnitTextviewId);
-                APPLICATION_DEADLINE_CURRENT_UNIT=this.<TextView>findViewById(R.id.universityProfileAppDeadlineCurrentUnitNameTextviewId);
-                APPLICATION_BEGIN=this.<TextView>findViewById(R.id.universityProfileAppBeginTextviewId);
-                APPLICATION_END=this.<TextView>findViewById(R.id.universityProfileAppEndTextviewId);
-                ADMIT_CURRENT_UNIT=this.<TextView>findViewById(R.id.universityProfileAdmitDeadlineCurrentUnitNameTextviewId);
-                ADMIT_BEGIN=this.<TextView>findViewById(R.id.universityProfileAdmitBeginTextviewId);
-                ADMIT_END=this.<TextView>findViewById(R.id.universityProfileAdmitEndTextviewId);
-                EXAM_DEADLINE_CURRENT_UNIT=this.<TextView>findViewById(R.id.universityProfileExamDeadlineCurrentUnitNameTextviewId);
-                EXAM_DEADLINE=this.<TextView>findViewById(R.id.universityProfileExamDealineTextviewId);
-                FEES_CURRENT_UNIT=this.<TextView>findViewById(R.id.universityProfileFeesCurrentUnitTextviewId);
-                FEES_TK=this.<TextView>findViewById(R.id.universityProfileFeesTkTextviewId);
+        APPLICATION_DEADLINE_CURRENT_UNIT=this.<TextView>findViewById(R.id.universityProfileAppDeadlineCurrentUnitNameTextviewId);
+        APPLICATION_BEGIN=this.<TextView>findViewById(R.id.universityProfileAppBeginTextviewId);
+        APPLICATION_END=this.<TextView>findViewById(R.id.universityProfileAppEndTextviewId);
+        ADMIT_CURRENT_UNIT=this.<TextView>findViewById(R.id.universityProfileAdmitDeadlineCurrentUnitNameTextviewId);
+        ADMIT_BEGIN=this.<TextView>findViewById(R.id.universityProfileAdmitBeginTextviewId);
+        ADMIT_END=this.<TextView>findViewById(R.id.universityProfileAdmitEndTextviewId);
+        EXAM_DEADLINE_CURRENT_UNIT=this.<TextView>findViewById(R.id.universityProfileExamDeadlineCurrentUnitNameTextviewId);
+        EXAM_DEADLINE=this.<TextView>findViewById(R.id.universityProfileExamDealineTextviewId);
+        FEES_CURRENT_UNIT=this.<TextView>findViewById(R.id.universityProfileFeesCurrentUnitTextviewId);
+        FEES_TK=this.<TextView>findViewById(R.id.universityProfileFeesTkTextviewId);
 
-                APPLY_NOW= this.<Button>findViewById(R.id.universityProfileApplyButtonTextviewId);
-                APPLY_NOW.setOnClickListener(this);
+        APPLY_NOW= this.<Button>findViewById(R.id.universityProfileApplyButtonTextviewId);
+        APPLY_NOW.setOnClickListener(this);
 
+        universityImage=(ImageView) findViewById(R.id.universityProfileImageId);
 
     }
     private void loadUnitInformation(){
@@ -124,6 +133,7 @@ public class universityAdmissionInfoActivity extends AppCompatActivity  implemen
 
         UNIVERSITY_ID=universityInformation.getUNIVERSITY_ID();
         ELIGBLE_UNIVERSITY_NAME=universityInformation.getUNIVERSITY_NAME();
+
 
         ArrayList<String>units=universityInformation.getUnitList();
         ELIGIBLE_UNIT_ARRAY_LIST=new ArrayList<>();
@@ -147,19 +157,20 @@ public class universityAdmissionInfoActivity extends AppCompatActivity  implemen
         }
         universityUnitInformation unitInformations=universityUnitInformations.get(0);
 
-         CURRENT_UNIT="Unit: "+unitInformations.getUNIT_NAME();
-         APPLICATIONBEGIN=unitInformations.getAPPLICATION_BEGIN();
-         APPLICATIONEND=unitInformations.getAPPLICATION_END();
-         ADMITCARDBEGIN=unitInformations.getADMIT_CARD_BEGIN();
-         ADMITCARDEND=unitInformations.getADMIT_CARD_END();
-         EXAMDEADLINE=unitInformations.getEXAM_DEADLINE();
-         FEES=unitInformations.getFEES()+ "Tk";
+        CURRENT_UNIT="Unit: "+unitInformations.getUNIT_NAME();
+        APPLICATIONBEGIN=unitInformations.getAPPLICATION_BEGIN();
+        APPLICATIONEND=unitInformations.getAPPLICATION_END();
+        ADMITCARDBEGIN=unitInformations.getADMIT_CARD_BEGIN();
+        ADMITCARDEND=unitInformations.getADMIT_CARD_END();
+        EXAMDEADLINE=unitInformations.getEXAM_DEADLINE();
+        FEES=unitInformations.getFEES()+ "Tk";
+        ADMISSION_LINK=unitInformations.getAPPLY_LINK();
 
 
 
 
-         String temp="Application Begin:\n"+Dbcontract.getDate(APPLICATIONBEGIN)+"\n"+Dbcontract.getTime(APPLICATIONBEGIN);
-         APPLICATIONBEGIN=temp;
+        String temp="Application Begin:\n"+Dbcontract.getDate(APPLICATIONBEGIN)+"\n"+Dbcontract.getTime(APPLICATIONBEGIN);
+        APPLICATIONBEGIN=temp;
 
         temp="Application End:\n"+Dbcontract.getDate(APPLICATIONEND)+"\n"+Dbcontract.getTime(APPLICATIONEND);
         APPLICATIONEND=temp;
@@ -176,25 +187,25 @@ public class universityAdmissionInfoActivity extends AppCompatActivity  implemen
 
 
 
-         //TEMPORARY (WE WILL USE LIST VIEW OF ALL UNITS)
+        //TEMPORARY (WE WILL USE LIST VIEW OF ALL UNITS)
       /*  StringTokenizer st = new StringTokenizer(ELIGIBLE_ALL_UNIT," ");
         if (st.hasMoreTokens()) {
 
             CURRENT_UNIT ="Unit: "+st.nextToken();
         }*/
 
-                ELIGIBLE_UNIVERSITY.setText(ELIGBLE_UNIVERSITY_NAME);
-                ELIGIBLE_UNIT.setText("Eligible units: "+ELIGIBLE_ALL_UNIT);
-                APPLICATION_DEADLINE_CURRENT_UNIT.setText(CURRENT_UNIT);
-                APPLICATION_BEGIN.setText(APPLICATIONBEGIN);
-                APPLICATION_END.setText(APPLICATIONEND);
-                ADMIT_CURRENT_UNIT.setText(CURRENT_UNIT);
-                ADMIT_BEGIN.setText(ADMITCARDBEGIN);
-                ADMIT_END.setText(ADMITCARDEND);
-                EXAM_DEADLINE_CURRENT_UNIT.setText(CURRENT_UNIT);
-                EXAM_DEADLINE.setText(EXAMDEADLINE);
-                FEES_CURRENT_UNIT.setText(CURRENT_UNIT);
-                FEES_TK.setText(FEES);
+        ELIGIBLE_UNIVERSITY.setText(ELIGBLE_UNIVERSITY_NAME);
+        ELIGIBLE_UNIT.setText("Eligible units: "+ELIGIBLE_ALL_UNIT);
+        APPLICATION_DEADLINE_CURRENT_UNIT.setText(CURRENT_UNIT);
+        APPLICATION_BEGIN.setText(APPLICATIONBEGIN);
+        APPLICATION_END.setText(APPLICATIONEND);
+        ADMIT_CURRENT_UNIT.setText(CURRENT_UNIT);
+        ADMIT_BEGIN.setText(ADMITCARDBEGIN);
+        ADMIT_END.setText(ADMITCARDEND);
+        EXAM_DEADLINE_CURRENT_UNIT.setText(CURRENT_UNIT);
+        EXAM_DEADLINE.setText(EXAMDEADLINE);
+        FEES_CURRENT_UNIT.setText(CURRENT_UNIT);
+        FEES_TK.setText(FEES);
 
 
     }
@@ -229,7 +240,9 @@ public class universityAdmissionInfoActivity extends AppCompatActivity  implemen
     public void onClick(View view) {
         long id=view.getId();
         if(id==R.id.universityProfileApplyButtonTextviewId){
-            
+            Intent intent= new Intent(this,admission_page_webviewActivity.class);
+            intent.putExtra(Dbcontract.ADMISSION_UNIT_LINK_KEY,ADMISSION_LINK);
+            startActivity(intent);
         }
     }
 }

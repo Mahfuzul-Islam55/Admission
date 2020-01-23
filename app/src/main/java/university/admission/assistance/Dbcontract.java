@@ -5,22 +5,23 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.widget.ImageView;
 
 import java.util.ArrayList;
 import java.util.StringTokenizer;
 
 public class Dbcontract {
 
-
     public static String CHECK_UNIVERSITIES="checkAvailableUniversities";
-    public static String CHECK_UNIVERSITIES_URL="https://universityadmission.000webhostapp.com/CheckAvailableUniversity.php";
+    public static String CHECK_UNIVERSITIES_URL=" https://admissionassistance.000webhostapp.com/CheckAvailableUniversity.php";
     public static String UNIVERSITY_INFORMATION="universityAllInformation";
-    public static String UNIVERSITY_INFORMATION_URL="https://universityadmission.000webhostapp.com/getUniversityUnitInformation.php";
+    public static String UNIVERSITY_INFORMATION_URL=" https://admissionassistance.000webhostapp.com/getUniversityUnitInformation.php";
 
     public static String UNIVERSITY_ID="university_id";
     public static String UNIT="unit";
     public static String BACKGROUND="background";
     public static String UNIVERSITY_LIST_INDEX_POSITION_KEY="position";
+    public static String ADMISSION_UNIT_LINK_KEY="admissionLink";
 
     public static String
             SCIENCE="science",
@@ -332,8 +333,9 @@ public class Dbcontract {
 
     //ERROR SECTION
     public static String URl_ERROR="Not found url";
-    public static String Query_ERROR="Unsuccessful Query on Database";
+    public static String Query_ERROR="Unsuccessful Query";
     public static String SERVER_ERROR="Server is not running";
+    public static Integer[] UNIVERSITY_IMAGE={0,R.drawable.buet,R.drawable.sust,R.drawable.du,R.drawable.cuet,R.drawable.ju,R.drawable.kuet,R.drawable.cu,R.drawable.bau,R.drawable.ku,R.drawable.jnu,R.drawable.ru,R.drawable.iut,R.drawable.sau};
 
 
 }
