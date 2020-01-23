@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+xmlns:android="http://schemas.android.com/apk/res/android"
+android:orientation="vertical"
+android:layout_width="match_parent"
+android:layout_height="match_parent">
+
+<LinearLayout
+    android:layout_margin="10dp"
+    android:layout_gravity="center"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="HSC Subject wise GPA"/>
+</LinearLayout>
+
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="10dp"
+    android:layout_weight="4">
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="2"
+        android:orientation="vertical">
+
+
+        <EditText
+            android:id="@+id/physicsEditTextId"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="Physics 0.0"
+            android:padding="5dp" />
+
+        <EditText
+            android:id="@+id/chemistryEditTextId"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="Chemistry 0.0"
+            android:padding="5dp" />
+
+        <EditText
+            android:id="@+id/mathEditTextId"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="Math 0.0"
+            android:padding="5dp" />
+
+        <EditText
+            android:id="@+id/BiologyEditTextId"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="Biology 0.0"
+            android:padding="5dp" />
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="2"
+        android:orientation="vertical">
+
+        <EditText
+            android:id="@+id/banglaEditTextId"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="Bangla 0.0"
+            android:padding="5dp" />
+
+        <EditText
+            android:id="@+id/englishEditTextId"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="English 0.0"
+            android:padding="5dp" />
+
+        <EditText
+            android:id="@+id/ictEditTextId"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="ICT 0.0"
+            android:padding="5dp" />
+
+
+    </LinearLayout>
+
+
+
+</LinearLayout>
+
+</LinearLayout>
