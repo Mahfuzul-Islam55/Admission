@@ -86,6 +86,7 @@
 
 
     <LinearLayout
+
         android:padding="2dp"
         android:background="#FF5050"
         android:gravity="center"

@@ -1,5 +1,6 @@
 package university.admission.assistance;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
@@ -27,17 +28,20 @@ public class BackgroundTask extends AsyncTask<String,Void,String> {
 
     private Context ctx;
     private String BACKGROUND="";
+    private ProgressDialog dialog;
 
 
     BackgroundTask(Context ctx,String BACKGROUND){
         this.ctx=ctx;
         this.BACKGROUND=BACKGROUND;
+        dialog=new ProgressDialog(ctx);
     }
 
     @Override
     protected void onPreExecute() {
+        dialog.setMessage("Processing..wait please");
+        if(ctx!=null)dialog.show();
 
-        super.onPreExecute();
     }
 
     @Override
@@ -149,6 +153,8 @@ public class BackgroundTask extends AsyncTask<String,Void,String> {
                     //showing on list view
                     Intent intent=new Intent(ctx,universityListActivity.class);
                     ctx.startActivity(intent);
+                    if (dialog.isShowing())dialog.dismiss();
+
 
 
 
@@ -283,7 +289,7 @@ public class BackgroundTask extends AsyncTask<String,Void,String> {
 
     @Override
     protected void onPostExecute(String message) {
-
+        if(dialog.isShowing())dialog.dismiss();
         Toast.makeText(ctx,message,Toast.LENGTH_SHORT).show();
 
     }

@@ -37,6 +37,7 @@ public class universityAdmissionInfoActivity extends AppCompatActivity  implemen
     private ArrayList<universityUnitInformation>universityUnitInformations;
     private ArrayList<availableUniversityInformation>availableUniversityInformations;
 
+    private String UNIVERSITY_ID=null;
     private ArrayList<String>ELIGIBLE_UNIT_ARRAY_LIST=null;
     private int UNIVERSITY_LIST_INDEX_POSITION=0;
     private String ELIGBLE_UNIVERSITY_NAME;
@@ -63,6 +64,7 @@ public class universityAdmissionInfoActivity extends AppCompatActivity  implemen
        updateCurrentTimeAndDate();
        findAll();
        loadUnitInformation();//for 1 unit
+        loadUnitListview();
 
     }
     private void loadUnitListview(){
@@ -74,11 +76,21 @@ public class universityAdmissionInfoActivity extends AppCompatActivity  implemen
         unitListview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
+
+                Object obj= getListView().getItemAtPosition(position);
+                String UNIT_NAME=obj.toString();
+
                 Toast.makeText(universityAdmissionInfoActivity.this,"clicked",Toast.LENGTH_SHORT).show();
+                //UNIT INFORMATION RETRIVE
+                Dbcontract.getUniversityAdmissionInformation(universityAdmissionInfoActivity.this,UNIVERSITY_ID,UNIT_NAME);
+                loadUnitInformation();
             }
         });
 
 
+    }
+    private ListView getListView(){
+        return  unitListview;
     }
     private void university_ClickIndex(){
         UNIVERSITY_LIST_INDEX_POSITION=Integer.parseInt(getIntent().getExtras().getString(Dbcontract.UNIVERSITY_LIST_INDEX_POSITION_KEY));
@@ -110,6 +122,7 @@ public class universityAdmissionInfoActivity extends AppCompatActivity  implemen
         availableUniversityInformations=Dbcontract.getAvailableUniversityInformationArrayList();
         availableUniversityInformation universityInformation=availableUniversityInformations.get(UNIVERSITY_LIST_INDEX_POSITION);
 
+        UNIVERSITY_ID=universityInformation.getUNIVERSITY_ID();
         ELIGBLE_UNIVERSITY_NAME=universityInformation.getUNIVERSITY_NAME();
 
         ArrayList<String>units=universityInformation.getUnitList();
@@ -134,7 +147,7 @@ public class universityAdmissionInfoActivity extends AppCompatActivity  implemen
         }
         universityUnitInformation unitInformations=universityUnitInformations.get(0);
 
-         TOTAL_UNIT=unitInformations.getUNIT_NAME();
+         CURRENT_UNIT="Unit: "+unitInformations.getUNIT_NAME();
          APPLICATIONBEGIN=unitInformations.getAPPLICATION_BEGIN();
          APPLICATIONEND=unitInformations.getAPPLICATION_END();
          ADMITCARDBEGIN=unitInformations.getADMIT_CARD_BEGIN();
@@ -164,11 +177,11 @@ public class universityAdmissionInfoActivity extends AppCompatActivity  implemen
 
 
          //TEMPORARY (WE WILL USE LIST VIEW OF ALL UNITS)
-        StringTokenizer st = new StringTokenizer(ELIGIBLE_ALL_UNIT," ");
+      /*  StringTokenizer st = new StringTokenizer(ELIGIBLE_ALL_UNIT," ");
         if (st.hasMoreTokens()) {
 
             CURRENT_UNIT ="Unit: "+st.nextToken();
-        }
+        }*/
 
                 ELIGIBLE_UNIVERSITY.setText(ELIGBLE_UNIVERSITY_NAME);
                 ELIGIBLE_UNIT.setText("Eligible units: "+ELIGIBLE_ALL_UNIT);
@@ -195,6 +208,7 @@ public class universityAdmissionInfoActivity extends AppCompatActivity  implemen
                         runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
+                                loadUnitInformation();
                                 TextView tdate=(TextView)findViewById(R.id.currentDateAndTimeId);
                                 long date=System.currentTimeMillis();
                                 SimpleDateFormat sdf=new SimpleDateFormat("dd MMM,yyyy\nhh:mm:ss a");
@@ -215,8 +229,7 @@ public class universityAdmissionInfoActivity extends AppCompatActivity  implemen
     public void onClick(View view) {
         long id=view.getId();
         if(id==R.id.universityProfileApplyButtonTextviewId){
-            loadUnitInformation();
-            loadUnitListview();
+            
         }
     }
 }
