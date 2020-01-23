@@ -25,6 +25,7 @@
                 android:src="@drawable/sustlogo"/>
 
             <TextView
+                android:id="@+id/universityProfileFullNameTextviewId"
                 android:layout_weight="3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -58,6 +59,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <TextView
+            android:id="@+id/universityProfileEligileUnitTextviewId"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Eligible units:"/>
@@ -70,12 +72,14 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <TextView
+            android:id="@+id/universityProfileApplicationDeadlineTextviewId"
             android:layout_weight="2"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:text="Application Deadline"/>
 
         <TextView
+            android:id="@+id/universityProfileAppDeadlineCurrentUnitNameTextviewId"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Unit: A"
@@ -93,10 +97,12 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content">
                 <TextView
+                    android:id="@+id/universityProfileAppBeginTextviewId"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="App Begin"/>
                 <TextView
+                    android:id="@+id/universityProfileAppEndTextviewId"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="App End"/>
@@ -120,6 +126,7 @@
             android:text="Admit Deadline"/>
 
         <TextView
+            android:id="@+id/universityProfileAdmitDeadlineCurrentUnitNameTextviewId"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Unit: A"
@@ -137,10 +144,12 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content">
                 <TextView
+                    android:id="@+id/universityProfileAdmitBeginTextviewId"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="App Begin"/>
                 <TextView
+                    android:id="@+id/universityProfileAdmitEndTextviewId"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="App End"/>
@@ -164,6 +173,7 @@
             android:layout_height="wrap_content"
             android:text="Exam Deadline"/>
         <TextView
+            android:id="@+id/universityProfileExamDeadlineCurrentUnitNameTextviewId"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Unit: A"
@@ -180,6 +190,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content">
                 <TextView
+                    android:id="@+id/universityProfileExamDealineTextviewId"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Date:Time"/>
@@ -193,46 +204,6 @@
     </LinearLayout>
 
 
-
-    <!--<LinearLayout
-        android:weightSum="5"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-        <TextView
-            android:layout_weight="2"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:text="Fees"/>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Unit: A"
-            android:padding="5dp"
-            android:layout_gravity="center"/>
-
-        <LinearLayout
-            android:layout_weight="3"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content">
-
-            <LinearLayout
-                android:orientation="vertical"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Unit: TK"/>
-
-
-            </LinearLayout>
-        </LinearLayout>
-
-
-
-    </LinearLayout>-->
-
     <LinearLayout
         android:gravity="center"
         android:weightSum="5"
@@ -244,6 +215,7 @@
             android:layout_height="wrap_content"
             android:text="Fees"/>
         <TextView
+            android:id="@+id/universityProfileFeesCurrentUnitTextviewId"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Unit: A"
@@ -260,6 +232,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content">
                 <TextView
+                    android:id="@+id/universityProfileFeesTkTextviewId"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Tk"/>
@@ -279,6 +252,7 @@
         android:text="checked to Get Updates"/>
 
    <Button
+       android:id="@+id/universityProfileApplyButtonTextviewId"
        android:layout_width="wrap_content"
        android:layout_height="wrap_content"
        android:text="Apply now"/>

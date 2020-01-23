@@ -8,6 +8,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
+import java.util.StringTokenizer;
+
 public class homeActivity extends AppCompatActivity implements View.OnClickListener {
     private Button scienceButton,commerceButton,artsButton,loginButton,signUpButton,universityProfileButton;
     private String SCIENCE="science",COMMERCE="commerce",ARTS="humanStudies";

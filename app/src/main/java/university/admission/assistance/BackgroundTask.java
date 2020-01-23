@@ -3,6 +3,7 @@ package university.admission.assistance;
 import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
+import android.util.Log;
 import android.widget.Toast;
 
 import org.json.JSONArray;
@@ -88,6 +89,7 @@ public class BackgroundTask extends AsyncTask<String,Void,String> {
                     }
                     is.close();
                     String result=sb.toString();
+                    System.out.println(result);
 
                     JSONArray ja=new JSONArray(result);
                     JSONObject jo=null;
@@ -181,6 +183,8 @@ public class BackgroundTask extends AsyncTask<String,Void,String> {
             String UNIVERSITYID=params[1];
             String UNIT_NAME=params[2];
 
+            ArrayList<universityUnitInformation>universityUnitInformations=new ArrayList<>();
+
             if(BACKGROUND.equals(Dbcontract.SCIENCE)){
                 try {
                     URL url=new URL(Dbcontract.UNIVERSITY_INFORMATION_URL);
@@ -193,12 +197,12 @@ public class BackgroundTask extends AsyncTask<String,Void,String> {
                     BufferedWriter bufferedWriter=new BufferedWriter(new OutputStreamWriter(outputStream,"UTF-8"));
                     String data=
                             URLEncoder.encode(Dbcontract.UNIVERSITY_ID,"UTF-8")+"="+URLEncoder.encode(UNIVERSITYID,"UTF-8")+"&"+
-                                    URLEncoder.encode(Dbcontract.BACKGROUND,"UTF-8")+"="+URLEncoder.encode(Dbcontract.CURRENT_BACKGROUND,"UTF-8")+"&"+
+                                    URLEncoder.encode(Dbcontract.BACKGROUND,"UTF-8")+"="+URLEncoder.encode(Dbcontract.SCIENCE,"UTF-8")+"&"+
                                     URLEncoder.encode(Dbcontract.UNIT,"UTF-8")+"="+URLEncoder.encode(UNIT_NAME,"UTF-8");
 
                     bufferedWriter.write(data);
                     bufferedWriter.close();
-                    bufferedWriter.flush();
+//                    bufferedWriter.flush();
                     outputStream.close();
 
                     InputStream is=httpURLConnection.getInputStream();
@@ -210,28 +214,46 @@ public class BackgroundTask extends AsyncTask<String,Void,String> {
                     }
                     is.close();
                     String result=sb.toString();
+                    System.out.println(result);
 
-                    JSONArray ja=new JSONArray(result);
                     JSONObject jo=null;
 
-                    for(int i=0;i<ja.length();i++){
+                         jo = new JSONObject(result);
+
+                  //  JSONArray ja=new JSONArray(result);
 
 
-                        jo=ja.getJSONObject(i);
-                        final String UNIVERSITY_ID=jo.getString("university_id");
-                        final String UNIVERSITY_NAME=jo.getString("fullName");
+                   // for(int i=0;i<ja.length();i++){
+
+                       // jo=ja.getJSONObject(i);
+
                         final String UNIT=jo.getString("unit");
-                        // System.out.println(UNIT+"\n");
+                        final String APPLICATION_BEGIN=jo.getString("applicationBegin");
+                        final String APPLICATION_END=jo.getString("applicationEnd");
+                        final String ADMIT_CARD_BEGIN=jo.getString("admitCardBegin");
+                        final String ADMIT_CARD_END=jo.getString("admitCardEnd");
+                        final String EXAM_DEADLINE=jo.getString("examDeadline");
+                        final String FEES=jo.getString("fees");
+
+                        universityUnitInformation unitInformations=new universityUnitInformation();
+
+                        unitInformations.setUNIT_NAME(UNIT);
+                        unitInformations.setAPPLICATION_BEGIN(APPLICATION_BEGIN);
+                        unitInformations.setAPPLICATION_END(APPLICATION_END);
+                        unitInformations.setADMIT_CARD_BEGIN(ADMIT_CARD_BEGIN);
+                        unitInformations.setADMIT_CARD_END(ADMIT_CARD_END);
+                        unitInformations.setEXAM_DEADLINE(EXAM_DEADLINE);
+                        unitInformations.setFEES(FEES);
 
 
+                        universityUnitInformations.add(unitInformations);
+                   // }
+                    //successfully receive unit all information
+                    Dbcontract.setUniversityUnitInformations(universityUnitInformations);
 
-                    }
+                        System.out.println("Successful unit information");
 
-
-
-
-
-
+                    System.out.println("Application Begin "+APPLICATION_BEGIN);
 
 
                 } catch (MalformedURLException e) {
