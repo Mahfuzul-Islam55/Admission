@@ -8,6 +8,15 @@
     android:orientation="vertical"
     tools:context=".universityAdmissionInfoActivity">
 
+    <ScrollView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+<LinearLayout
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+
+
 <!--profile-->
     <LinearLayout
         android:layout_width="match_parent"
@@ -67,6 +76,8 @@
 
 
     <LinearLayout
+        android:padding="2dp"
+        android:background="#FF5050"
         android:gravity="center"
         android:weightSum="5"
         android:layout_width="match_parent"
@@ -115,6 +126,8 @@
     </LinearLayout>
 
     <LinearLayout
+        android:padding="2dp"
+        android:background="#7FD884"
         android:gravity="center"
         android:weightSum="5"
         android:layout_width="match_parent"
@@ -163,6 +176,8 @@
 
 
     <LinearLayout
+        android:padding="2dp"
+        android:background="#05E911"
         android:gravity="center"
         android:weightSum="5"
         android:layout_width="match_parent"
@@ -205,6 +220,8 @@
 
 
     <LinearLayout
+        android:padding="2dp"
+        android:background="#0EACFF"
         android:gravity="center"
         android:weightSum="5"
         android:layout_width="match_parent"
@@ -256,6 +273,10 @@
        android:layout_width="wrap_content"
        android:layout_height="wrap_content"
        android:text="Apply now"/>
+
+
+</LinearLayout>
+    </ScrollView>
 
 
 </LinearLayout>

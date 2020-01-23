@@ -278,7 +278,7 @@ public class BackgroundTask extends AsyncTask<String,Void,String> {
             }
         }
 
-        return null;
+        return "Successfull Execute All";
     }
 
     @Override

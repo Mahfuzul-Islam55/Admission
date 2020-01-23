@@ -32,7 +32,7 @@ public class universityAdmissionInfoActivity extends AppCompatActivity  implemen
     private ArrayList<universityUnitInformation>universityUnitInformations;
     private ArrayList<availableUniversityInformation>availableUniversityInformations;
 
-    private int UNIVERSITY_LIST_INDEX_POSITION;
+    private int UNIVERSITY_LIST_INDEX_POSITION=0;
     private String ELIGBLE_UNIVERSITY_NAME;
     private String ELIGIBLE_ALL_UNIT="";
     private String TOTAL_UNIT;
@@ -113,18 +113,38 @@ public class universityAdmissionInfoActivity extends AppCompatActivity  implemen
          ADMITCARDBEGIN=unitInformations.getADMIT_CARD_BEGIN();
          ADMITCARDEND=unitInformations.getADMIT_CARD_END();
          EXAMDEADLINE=unitInformations.getEXAM_DEADLINE();
-         FEES=unitInformations.getFEES();
+         FEES=unitInformations.getFEES()+ "Tk";
+
+
+
+
+         String temp="Application Begin:\n"+Dbcontract.getDate(APPLICATIONBEGIN)+"\n"+Dbcontract.getTime(APPLICATIONBEGIN);
+         APPLICATIONBEGIN=temp;
+
+        temp="Application End:\n"+Dbcontract.getDate(APPLICATIONEND)+"\n"+Dbcontract.getTime(APPLICATIONEND);
+        APPLICATIONEND=temp;
+
+        temp="Admit Download Begin:\n"+Dbcontract.getDate(ADMITCARDBEGIN)+"\n"+Dbcontract.getTime(ADMITCARDBEGIN);
+        ADMITCARDBEGIN=temp;
+
+        temp="Admit Download End:\n"+Dbcontract.getDate(ADMITCARDEND)+"\n"+Dbcontract.getTime(ADMITCARDEND);
+        ADMITCARDEND=temp;
+
+        temp="Exam Date:Time:\n"+Dbcontract.getDate(EXAMDEADLINE)+"\n"+Dbcontract.getTime(EXAMDEADLINE);
+        EXAMDEADLINE=temp;
+
+
 
 
          //TEMPORARY (WE WILL USE LIST VIEW OF ALL UNITS)
         StringTokenizer st = new StringTokenizer(ELIGIBLE_ALL_UNIT," ");
         if (st.hasMoreTokens()) {
 
-            CURRENT_UNIT =st.nextToken();
+            CURRENT_UNIT ="Unit: "+st.nextToken();
         }
 
                 ELIGIBLE_UNIVERSITY.setText(ELIGBLE_UNIVERSITY_NAME);
-                ELIGIBLE_UNIT.setText(ELIGIBLE_ALL_UNIT);
+                ELIGIBLE_UNIT.setText("Eligible units: "+ELIGIBLE_ALL_UNIT);
                 APPLICATION_DEADLINE_CURRENT_UNIT.setText(CURRENT_UNIT);
                 APPLICATION_BEGIN.setText(APPLICATIONBEGIN);
                 APPLICATION_END.setText(APPLICATIONEND);
@@ -150,7 +170,7 @@ public class universityAdmissionInfoActivity extends AppCompatActivity  implemen
                             public void run() {
                                 TextView tdate=(TextView)findViewById(R.id.currentDateAndTimeId);
                                 long date=System.currentTimeMillis();
-                                SimpleDateFormat sdf=new SimpleDateFormat("MMM dd yyyy\nhh-mm-ss a");
+                                SimpleDateFormat sdf=new SimpleDateFormat("dd MMM,yyyy\nhh:mm:ss a");
                                 String dateString=sdf.format(date);
                                 tdate.setText(dateString);
                             }

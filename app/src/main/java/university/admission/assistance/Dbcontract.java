@@ -7,14 +7,15 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 
 import java.util.ArrayList;
+import java.util.StringTokenizer;
 
 public class Dbcontract {
 
 
     public static String CHECK_UNIVERSITIES="checkAvailableUniversities";
-    public static String CHECK_UNIVERSITIES_URL="http://192.168.0.104/www/admissionAssistance/CheckAvailableUniversity.php";
+    public static String CHECK_UNIVERSITIES_URL="http://10.100.161.240/www/admissionAssistance/CheckAvailableUniversity.php";
     public static String UNIVERSITY_INFORMATION="universityAllInformation";
-    public static String UNIVERSITY_INFORMATION_URL="http://192.168.0.104/www/admissionAssistance/getUniversityUnitInformation.php";
+    public static String UNIVERSITY_INFORMATION_URL="http://10.100.161.240/www/admissionAssistance/getUniversityUnitInformation.php";
 
     public static String UNIVERSITY_ID="university_id";
     public static String UNIT="unit";
@@ -233,6 +234,101 @@ public class Dbcontract {
         return (networkInfo!=null && networkInfo.isConnected());
 
     }
+    public static String getDate(String date){
+        String YEAR="",
+                MONTH="",
+                DAY="";
+        String FINAL_DATE="";
+
+        StringTokenizer st = new StringTokenizer(date,"- :");
+        if(st.hasMoreTokens()) {
+
+            YEAR=st.nextToken();
+        }
+        if(st.hasMoreTokens()) {
+
+            MONTH=st.nextToken();
+        }
+        if(st.hasMoreTokens()) {
+
+            DAY=st.nextToken();
+        }
+
+        FINAL_DATE=DAY+" "+Dbcontract.MONTHS[Integer.parseInt(MONTH)]+","+YEAR;
+
+        return FINAL_DATE;
+
+    }
+    public static String getTime(String time){
+
+        String temp="";
+
+        StringTokenizer st = new StringTokenizer(time,"- :");
+        if(st.hasMoreTokens()) {
+
+            temp=st.nextToken();
+        }
+        if(st.hasMoreTokens()) {
+
+            temp=st.nextToken();
+        }
+        if(st.hasMoreTokens()) {
+
+            temp=st.nextToken();
+        }
+
+
+        String HOUR="",
+                MIN="",
+                SECOND="";
+        String FINAL_TIME="";
+        String NIGHT="AM";
+        String DAY="PM";
+        String AM_PM=DAY;
+//        StringTokenizer st = new StringTokenizer(time,":");
+        if(st.hasMoreTokens()) {
+
+            HOUR=st.nextToken();
+            int Hour=Integer.parseInt(HOUR);
+
+            if(Hour==0){
+                Hour=12;
+                AM_PM=NIGHT;
+            }
+            else if(Hour-12<0){
+                Hour=Hour;
+                AM_PM=NIGHT;
+
+            }
+            else if(Hour-12==0){
+                Hour=12;
+                AM_PM=DAY;
+            }
+            else {
+                Hour=Hour-12;
+                AM_PM=DAY;
+            }
+
+            HOUR=Integer.toString(Hour);
+
+        }
+        if(st.hasMoreTokens()) {
+
+            MIN=st.nextToken();
+        }
+        if(st.hasMoreTokens()) {
+
+            SECOND=st.nextToken();
+        }
+
+
+
+        FINAL_TIME+=HOUR+":"+MIN+":"+SECOND+" "+AM_PM;
+
+        return FINAL_TIME;
+
+    }
+    public static String[] MONTHS={"NULL","JANUARY", "FEBRUARY", "MARCH", "APRIL", "MAY", "JUNE", "JULY", "AUGUST", "SEPTEMBER","OCTOBER","NOVEMBER","DECEMBER"};
 
     //ERROR SECTION
     public static String URl_ERROR="Not found url";
