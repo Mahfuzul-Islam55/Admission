@@ -1,14 +1,35 @@
 package university.admission.assistance;
 
+import android.app.AlertDialog;
+import android.content.Context;
+import android.content.DialogInterface;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
+
 import java.util.ArrayList;
 
 public class Dbcontract {
 
-    public static String BACKGROUND="background";
+    public static String UNIVERSITY_ID="university_id";
+    public static String UNIT="unit";
+
     public static String
             SCIENCE="science",
             COMMERCE="commerce",
             ARTS="humanStudies";
+
+    public static String BACKGROUND="background";
+    public static String CURRENT_BACKGROUND=SCIENCE;
+
+    public String getCURRENT_BACKGROUND() {
+        return CURRENT_BACKGROUND;
+    }
+
+    public void setCURRENT_BACKGROUND(String CURRENT_BACKGROUND) {
+        this.CURRENT_BACKGROUND = CURRENT_BACKGROUND;
+    }
+
+
 
     public static String SSC_YEAR="sscYear";
     public static String SSC_GPA="sscGpa";
@@ -58,9 +79,13 @@ public class Dbcontract {
 
 
     public static String CHECK_UNIVERSITIES="checkAvailableUniversities";
-    public static String UNIVERSITY_INFORMATION="universityAllInformation";
     public static String CHECK_UNIVERSITIES_URL="http://192.168.0.104/www/admissionAssistance/CheckAvailableUniversity.php";
+    public static String UNIVERSITY_INFORMATION="universityAllInformation";
     public static String UNIVERSITY_INFORMATION_URL="";
+
+    public static ArrayList<availableUniversityInformation> getAvailableUniversityInformationArrayList() {
+        return availableUniversityInformationArrayList;
+    }
 
     private static ArrayList<availableUniversityInformation>availableUniversityInformationArrayList;
 
@@ -157,6 +182,50 @@ public class Dbcontract {
         ICT_GPA = ictGpa;
     }
 
+
+    //ALERT SECTION
+    public static AlertDialog alertDialog;
+    public static void Alert(Context ctx, String title, String text){
+
+        alertDialog=new AlertDialog.Builder(ctx).create();
+        alertDialog.setTitle(title);
+        alertDialog.setMessage(text);
+        alertDialog.setButton(DialogInterface.BUTTON_NEUTRAL, "OK", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                alertDialog.cancel();
+            }
+        });
+
+        alertDialog.show();
+
+    }
+    //EXECUTE SECTION
+
+    public static synchronized void getUniversityAdmissionInformation(Context context,String UNIVERSITY_ID){
+
+        if(checkNetworkConnection(context)){
+
+            String method=UNIVERSITY_INFORMATION;
+            BackgroundTask backgroundTask=new BackgroundTask(context,CURRENT_BACKGROUND);
+            backgroundTask.execute(method,UNIVERSITY_ID);
+        }
+        else Dbcontract.Alert(context,"Network Connection","Check Internet Connection");
+
+    }
+    public static boolean checkNetworkConnection(Context context){
+
+        ConnectivityManager connectivityManager= (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo networkInfo=connectivityManager.getActiveNetworkInfo();
+
+        return (networkInfo!=null && networkInfo.isConnected());
+
+    }
+
+    //ERROR SECTION
+    public static String URl_ERROR="Not found url";
+    public static String Query_ERROR="Unsuccessful Query on Database";
+    public static String SERVER_ERROR="Server is not running";
 
 
 }

@@ -1,9 +1,12 @@
 package university.admission.assistance;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.AsyncTask;
+import android.widget.Toast;
 
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
@@ -101,6 +104,7 @@ public class BackgroundTask extends AsyncTask<String,Void,String> {
 
                         boolean university_exist=false;
                         for (int j=0;j<universityList.size();j++){
+
                             availableUniversityInformation temp_university=universityList.get(j);
                             if(temp_university.getUNIVERSITY_ID().equals(UNIVERSITY_ID)){
                                 universityList.get(j).getUnitList().add(UNIT);
@@ -110,10 +114,14 @@ public class BackgroundTask extends AsyncTask<String,Void,String> {
 
                         }
 
-                        if(!university_exist){
+                        if(university_exist==false){
                             university.setUNIVERSITY_ID(UNIVERSITY_ID);
                             university.setUNIVERSITY_NAME(UNIVERSITY_NAME);
-                            university.getUnitList().add(UNIT);
+
+                            ArrayList<String> unit=new ArrayList<>();
+                            unit.add(UNIT);
+                            university.setUnitList(unit);
+
                             universityList.add(university);
 
                         }
@@ -122,13 +130,23 @@ public class BackgroundTask extends AsyncTask<String,Void,String> {
 
                Dbcontract.setAvailableUniversityInformationArrayList(universityList);
 
-                    for (int j=0;j<universityList.size();j++){
+                   /* for (int j=0;j<universityList.size();j++){
                         availableUniversityInformation temp_university=universityList.get(j);
                         System.out.println(temp_university.getUNIVERSITY_NAME());
                         System.out.println(temp_university.getUNIVERSITY_ID());
-                        System.out.println(temp_university.getUnitList().get(0));
+                        ArrayList<String>unit=new ArrayList<>();
+                        unit=temp_university.getUnitList();
 
-                    }
+                        for(int k=0;k<unit.size();k++)
+                        System.out.println(unit.get(k));
+
+                    }*/
+
+                    //Applicable university information is collected successfully
+
+                    //showing on list view
+                    Intent intent=new Intent(ctx,universityListActivity.class);
+                    ctx.startActivity(intent);
 
 
 
@@ -136,10 +154,17 @@ public class BackgroundTask extends AsyncTask<String,Void,String> {
 
 
                 } catch (MalformedURLException e) {
-                    //NOT URL FOUND
+
                     e.printStackTrace();
+                    return Dbcontract.URl_ERROR;
+
+                }catch (JSONException e){
+                    e.printStackTrace();
+                    return Dbcontract.Query_ERROR;
+
                 } catch (Exception e) {
                     e.printStackTrace();
+                    return Dbcontract.SERVER_ERROR;
                 }
             }
             else if(BACKGROUND.equals(Dbcontract.COMMERCE)){
@@ -151,14 +176,94 @@ public class BackgroundTask extends AsyncTask<String,Void,String> {
 
 
         }
+        else if(method.equals(Dbcontract.UNIVERSITY_INFORMATION)){
+
+            String UNIVERSITYID=params[1];
+            String UNIT_NAME=params[2];
+
+            if(BACKGROUND.equals(Dbcontract.SCIENCE)){
+                try {
+                    URL url=new URL(Dbcontract.UNIVERSITY_INFORMATION_URL);
+                    HttpURLConnection httpURLConnection=(HttpURLConnection) url.openConnection();
+                    httpURLConnection.setRequestMethod("POST");
+                    httpURLConnection.setDoOutput(true);
+                    httpURLConnection.setDoInput(true);
+
+                    OutputStream outputStream=httpURLConnection.getOutputStream();
+                    BufferedWriter bufferedWriter=new BufferedWriter(new OutputStreamWriter(outputStream,"UTF-8"));
+                    String data=
+                            URLEncoder.encode(Dbcontract.UNIVERSITY_ID,"UTF-8")+"="+URLEncoder.encode(UNIVERSITYID,"UTF-8")+"&"+
+                                    URLEncoder.encode(Dbcontract.BACKGROUND,"UTF-8")+"="+URLEncoder.encode(Dbcontract.CURRENT_BACKGROUND,"UTF-8")+"&"+
+                                    URLEncoder.encode(Dbcontract.UNIT,"UTF-8")+"="+URLEncoder.encode(UNIT_NAME,"UTF-8");
+
+                    bufferedWriter.write(data);
+                    bufferedWriter.close();
+                    bufferedWriter.flush();
+                    outputStream.close();
+
+                    InputStream is=httpURLConnection.getInputStream();
+                    BufferedReader br=new BufferedReader(new InputStreamReader(is,"UTF-8"));
+                    StringBuilder sb=new StringBuilder();
+                    String line=null;
+                    while ((line=br.readLine())!=null){
+                        sb.append(line+"\n");
+                    }
+                    is.close();
+                    String result=sb.toString();
+
+                    JSONArray ja=new JSONArray(result);
+                    JSONObject jo=null;
+
+                    for(int i=0;i<ja.length();i++){
+
+
+                        jo=ja.getJSONObject(i);
+                        final String UNIVERSITY_ID=jo.getString("university_id");
+                        final String UNIVERSITY_NAME=jo.getString("fullName");
+                        final String UNIT=jo.getString("unit");
+                        // System.out.println(UNIT+"\n");
+
+
+
+                    }
+
+
+
+
+
+
+
+
+                } catch (MalformedURLException e) {
+
+                    e.printStackTrace();
+                    return Dbcontract.URl_ERROR;
+
+                }catch (JSONException e){
+                    e.printStackTrace();
+                    return Dbcontract.Query_ERROR;
+
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    return Dbcontract.SERVER_ERROR;
+                }
+            }
+            else if(BACKGROUND.equals(Dbcontract.COMMERCE)){
+
+            }
+            else if(BACKGROUND.equals(Dbcontract.ARTS)){
+
+            }
+        }
 
         return null;
     }
 
     @Override
-    protected void onPostExecute(String s) {
+    protected void onPostExecute(String message) {
 
-        super.onPostExecute(s);
+        Toast.makeText(ctx,message,Toast.LENGTH_SHORT).show();
+
     }
 }
 

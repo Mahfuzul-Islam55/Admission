@@ -5,7 +5,7 @@ import java.util.ArrayList;
 public class availableUniversityInformation {
     private String UNIVERSITY_ID;
     private String UNIVERSITY_NAME;
-    private ArrayList<String>unitList=new ArrayList<>();
+    private ArrayList<String>unitList;
 
     public String getUNIVERSITY_ID() {
         return UNIVERSITY_ID;

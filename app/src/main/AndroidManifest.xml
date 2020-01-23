@@ -12,7 +12,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".universityAdmissionInfoActivity"></activity>
+        <activity android:name=".universityListActivity"></activity>
+        <activity android:name=".universityAdmissionInfoActivity" />
         <activity android:name=".university" />
         <activity android:name=".student" />
         <activity android:name=".homeActivity">

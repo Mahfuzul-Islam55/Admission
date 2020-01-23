@@ -41,6 +41,8 @@ public class homeActivity extends AppCompatActivity implements View.OnClickListe
     public void onClick(View view) {
         long id=view.getId();
         if(id==R.id.scienceButtonId){
+            Dbcontract.CURRENT_BACKGROUND=SCIENCE;
+
             Intent intent= new Intent(homeActivity.this,student.class);
             intent.putExtra(BACKGROUND_KEY,SCIENCE);
             startActivity(intent);
@@ -48,12 +50,14 @@ public class homeActivity extends AppCompatActivity implements View.OnClickListe
             Toast.makeText(this,"Science Background",Toast.LENGTH_SHORT).show();
         }
         else if(id==R.id.commerceButtonId){
+            Dbcontract.CURRENT_BACKGROUND=COMMERCE;
             Intent intent= new Intent(homeActivity.this,student.class);
             intent.putExtra(BACKGROUND_KEY,COMMERCE);
             startActivity(intent);
             Toast.makeText(this,"Commerce Background",Toast.LENGTH_SHORT).show();
         }
         else if(id==R.id.artsButtonId){
+            Dbcontract.CURRENT_BACKGROUND=ARTS;
             Intent intent= new Intent(homeActivity.this,student.class);
             intent.putExtra(BACKGROUND_KEY,ARTS);
             startActivity(intent);

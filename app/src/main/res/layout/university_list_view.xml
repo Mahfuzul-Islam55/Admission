@@ -14,14 +14,23 @@
             android:layout_weight="5"
             android:layout_width="0dp"
             android:layout_height="wrap_content">
-        <ImageView
-            android:layout_weight="2"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:src="@drawable/sustlogo"/>
             <TextView
-                android:layout_weight="3"
-                android:layout_width="wrap_content"
+                android:id="@+id/universityRankId"
+                android:layout_weight="0.5"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="Rank"
+                android:layout_gravity="center"
+                android:textSize="10sp"/>
+       <!-- <ImageView
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:src="@drawable/sustlogo"/>-->
+            <TextView
+                android:id="@+id/universityFullNameTextviewId"
+                android:layout_weight="4"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:text="@string/sustfullinfo"
                 android:textSize="18sp"/>
@@ -30,27 +39,31 @@
 
 
         <LinearLayout
-            android:layout_weight="2"
+            android:padding="5dp"
+            android:layout_gravity="center"
+            android:layout_weight="3"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
             <TextView
+
                 android:layout_weight="1"
                 android:layout_width="wrap_content"
                 android:layout_height="0dp"
                 android:text="Applicable Units"
-                android:layout_gravity="center"
+                android:layout_gravity="start"
                 android:textAlignment="center"
                 android:textSize="10dp" />
 
             <TextView
+                android:id="@+id/applicableUnitId"
                 android:layout_weight="1"
                 android:layout_width="wrap_content"
                 android:layout_height="0dp"
                 android:text="B1,B2"
                 android:textAlignment="center"
-                android:layout_gravity="center"
+                android:layout_gravity="start"
                 android:textSize="10dp" />
 
 
@@ -61,7 +74,7 @@
                 android:id="@+id/universityWishListRating"
                 android:layout_width="wrap_content"
                 android:layout_height="0dp"
-                android:layout_gravity="center"
+                android:layout_gravity="start"
 
                 android:numStars="5"
                 android:rating="1"

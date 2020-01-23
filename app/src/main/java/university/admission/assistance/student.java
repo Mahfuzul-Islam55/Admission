@@ -2,6 +2,9 @@ package university.admission.assistance;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -141,11 +144,15 @@ public class student extends AppCompatActivity implements View.OnClickListener {
         long id=view.getId();
         if(id==R.id.checkUniversitiesButtonId){
             if(getStudentAllInformation()){
-                Toast.makeText(this,"All Fielded up",Toast.LENGTH_SHORT).show();
+                if(checkNetworkConnection()){
+                    Toast.makeText(this,"All Fielded up",Toast.LENGTH_SHORT).show();
 
-                String method=Dbcontract.CHECK_UNIVERSITIES;
-                BackgroundTask backgroundTask=new BackgroundTask(this,Dbcontract.SCIENCE);
-                backgroundTask.execute(method);
+                    String method=Dbcontract.CHECK_UNIVERSITIES;
+                    BackgroundTask backgroundTask=new BackgroundTask(this,Dbcontract.SCIENCE);
+                    backgroundTask.execute(method);
+                }
+                else Dbcontract.Alert(this,"Network Connection","Check Internet Connection");
+
 
             }
             else  Toast.makeText(this,"All Field Not get information",Toast.LENGTH_SHORT).show();
@@ -153,5 +160,14 @@ public class student extends AppCompatActivity implements View.OnClickListener {
 
 
         }
+    }
+
+    public  boolean checkNetworkConnection(){
+
+        ConnectivityManager connectivityManager= (ConnectivityManager) this.getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo networkInfo=connectivityManager.getActiveNetworkInfo();
+
+        return (networkInfo!=null && networkInfo.isConnected());
+
     }
 }
