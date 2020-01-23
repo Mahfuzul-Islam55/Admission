@@ -24,10 +24,11 @@
 
 
             <Button
+                android:id="@+id/checkUniversitiesButtonId"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Check Available"
-                android:id="@+id/checkAvailableButtonId"/>
+                android:text="Check Universities"
+                />
 
         </LinearLayout>
 

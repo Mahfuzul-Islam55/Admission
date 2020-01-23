@@ -12,6 +12,7 @@ public class homeActivity extends AppCompatActivity implements View.OnClickListe
     private Button scienceButton,commerceButton,artsButton,loginButton,signUpButton,universityProfileButton;
     private String SCIENCE="science",COMMERCE="commerce",ARTS="arts";
     private String BACKGROUND_KEY="background";
+    private double n;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -19,6 +20,7 @@ public class homeActivity extends AppCompatActivity implements View.OnClickListe
         setContentView(R.layout.home_activity);
 
         allFunction();
+
     }
     private void allFunction(){
         allFind();

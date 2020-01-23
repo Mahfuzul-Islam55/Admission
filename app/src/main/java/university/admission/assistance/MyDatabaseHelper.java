@@ -1,5 +1,4 @@
 package university.admission.assistance;
 
-
-public class init {
+public class MyDatabaseHelper {
 }
