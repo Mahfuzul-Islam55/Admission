@@ -91,8 +91,8 @@ public class universityAdmissionInfoActivity extends AppCompatActivity  implemen
             }
         });
 
-        if(UNIVERSITY_LIST_INDEX_POSITION+1<Dbcontract.UNIVERSITY_IMAGE.length)
-            universityImage.setImageResource(Dbcontract.UNIVERSITY_IMAGE[UNIVERSITY_LIST_INDEX_POSITION+1]);
+        if(Integer.parseInt(UNIVERSITY_ID)<Dbcontract.UNIVERSITY_IMAGE.length)
+            universityImage.setImageResource(Dbcontract.UNIVERSITY_IMAGE[Integer.parseInt(UNIVERSITY_ID)]);
 
 
     }
